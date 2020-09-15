@@ -6,7 +6,10 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'app\config\bootstrap\VideoBootstrap'
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -43,6 +46,11 @@ $config = [
             ],
         ],
         'db' => $db,
+        'formatter' => [
+            'class' => \app\helpers\Formatter::class,
+            'decimalSeparator' => '.',
+            'thousandSeparator' => ' ',
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -53,6 +61,7 @@ $config = [
         */
     ],
     'params' => $params,
+    'defaultRoute' => 'video',
 ];
 
 if (YII_ENV_DEV) {
