@@ -2,11 +2,14 @@
 
 1) docker-compose build
 2) docker-compose up
-3) docker exec -it  yi_test-php-fpm /bin/bash
+3) cd app
+4) composer install
+5) docker exec -it  yi_test-php-fpm /bin/bash
  - php yii migrate
  - php yii seed/videos (create 1000 rows by Faker)
  - php yii seed/videos-dublicates-fill (create 1000000 rows by duplicate previous with some random)
-4) open http://localhost:8000 in browser
+ - chmod -R 777 ./web/assets/ (not sure, if have problems on next step)
+6) open http://localhost:8000 in browser
 
 ## Explain
 
