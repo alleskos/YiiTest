@@ -16,8 +16,11 @@ QUERY PLAN
      
 --------------------------------------------------------------------------------
  Limit  (cost=10.56..15.63 rows=50 width=87)
+
    ->  Index Scan Backward using "idx-videos-added-id" on videos  (cost=0.42..100878.83 rows=995104 width=87)
+
          Filter: ((added < '2020-09-05 04:15:35'::timestamp without time zone) OR ((added = '2020-09-05 04:15:35'::timestamp without time zone) AND (id <= 888716)))
+
 (3 rows)
 
 
@@ -27,6 +30,9 @@ QUERY PLAN
                     
 --------------------------------------------------------------------------------
  Limit  (cost=2.93..5.32 rows=20 width=87)
+
    ->  Index Scan using "idx-videos-views-id" on videos  (cost=0.42..95889.84 rows=803716 width=87)
+
          Filter: ((views > 199706) OR ((views = 199706) AND (id >= 612143)))
+
 (3 rows)
