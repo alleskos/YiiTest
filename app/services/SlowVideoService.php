@@ -3,18 +3,20 @@
 namespace app\services;
 
 use app\models\Video;
+use yii\data\Pagination;
+use yii\data\Sort;
 
 class SlowVideoService implements VideoService
 {
-    
+
     public function getCount()
     {
-       return Video::find()->count();
+        return Video::find()->count();
     }
 
-    public function getList($limit, $offset, $order)
+    public function getList(Pagination $pagination, Sort $sort)
     {
-        return Video::find()->limit($limit)->offset($offset)->orderBy($order)->all();
+        return Video::find()->limit($pagination->limit)->offset($pagination->offset)->orderBy($sort->orders)->all();
     }
 
 }

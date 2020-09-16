@@ -11,7 +11,7 @@ class VideoBootstrap implements BootstrapInterface
     {
         $container = \Yii::$container;
         $container->setSingleton('app\services\VideoService', [
-            'class' => 'app\services\SlowVideoService'
+            'class' => 'app\services\FastVideoService'
         ]);
     }
 

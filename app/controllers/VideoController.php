@@ -27,7 +27,7 @@ class VideoController extends Controller
             'defaultOrder' => ['added' => SORT_DESC]
         ]);
         $pages = new Pagination(['totalCount' => $this->service->getCount()]);
-        $videos = $this->service->getList($pages->limit, $pages->offset, $sort->orders);
+        $videos = $this->service->getList($pages, $sort);
         return $this->render('index', [
                     'videos' => $videos,
                     'pages' => $pages,

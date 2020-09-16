@@ -29,6 +29,7 @@ foreach ($allowPerPage as $perPage) {
     <div>
         Order By:
         <?php
+        $sort->params = [];
         echo $sort->link('views') . ' | ' . $sort->link('added');
         ?>  
     </div>

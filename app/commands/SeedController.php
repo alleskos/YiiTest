@@ -6,9 +6,11 @@ use yii\console\Controller;
 use yii\console\ExitCode;
 use app\models\Video;
 use Faker\Factory as FakerFaktory;
+use yii\db\Query;
 
 class SeedController extends Controller
 {
+
     public function actionVideos()
     {
         $faker = FakerFaktory::create();
@@ -24,6 +26,25 @@ class SeedController extends Controller
             $video->save();
         }
         return ExitCode::OK;
+    }
+
+    public function actionVideosDublicatesFill()
+    {
+        $query = new Query();
+        $query->createCommand()->setRawSql(
+                "INSERT INTO
+                    videos (title, thumbnail, duration, views, added)
+                    (SELECT
+                      t1.title as title,
+                      t1.thumbnail as thumbnail,
+                      FLOOR(RANDOM() * 86400) + 10 as duration,      
+                      FLOOR(RANDOM() * 1000000) as views,  
+                      ('now'::timestamp - (RANDOM() * 5 * 365) * '1 day'::interval) as added
+                    FROM
+                      videos AS t1,
+                      videos AS t2)"
+        )->query();
+        $query->createCommand()->setRawSql('VACUUM ANALYZE')->query();
     }
 
 }
